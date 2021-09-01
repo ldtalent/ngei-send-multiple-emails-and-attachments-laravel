@@ -10,7 +10,7 @@ class Attachment extends Model
     use HasFactory;
     protected $casts = [
         'cc'=>'array',
-        'attachments'=>'array'
+//        'attachments'=>'array'
     ];
     protected $fillable = [
         'email',
