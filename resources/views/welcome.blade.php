@@ -24,9 +24,42 @@
             </li>
         @endforeach
     @endif
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sendEmail">
-        Send Email
-    </button>
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#sendEmail">
+                Send Email
+            </button>
+            <table class="table table-bordered table-stripped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                        <th>CC</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $count=1?>
+                @foreach($emails as $email)
+                    <tr>
+                        <td>{{$count++}}</td>
+                        <td>{{$email->email}}</td>
+                        <td>
+                            @foreach($email->cc as $cc)
+                                <li style="list-style: none">{{$cc}}</li>
+                            @endforeach
+                        </td>
+                        <td>{{$email->subject}}</td>
+                        <td>{{$email->message}}</td>
+                        <td>{{$email->message}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="modal fade" id="sendEmail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
