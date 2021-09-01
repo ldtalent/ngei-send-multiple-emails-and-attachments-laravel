@@ -14,7 +14,7 @@ use App\Http\Controllers\AttachmentController;
 |
 */
 Route::get('/',[AttachmentController::class,'index']);
-
+Route::post('/send',[AttachmentController::class,'send']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

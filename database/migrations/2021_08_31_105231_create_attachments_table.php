@@ -20,7 +20,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('subject');
             $table->string('message');
             $table->string('attachments');
-            $table->string('send');
+            $table->string('send')->nullable();
             $table->timestamps();
         });
     }

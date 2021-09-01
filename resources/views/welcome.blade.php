@@ -9,17 +9,28 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js">
     </script>
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css"/>
+    <title>Mailer</title>
 </head>
 <body>
 <div class="container">
     <h2>Send Multiple Mails and Attachments</h2>
+    @if(count($errors)>0)
+        @foreach($errors->all() as $error)
+            <li class="" role="alert">
+                <strong>{{$error}}!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+        @endforeach
+    @endif
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sendEmail">
         Send Email
     </button>
     <div class="modal fade" id="sendEmail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" action="{{url('send')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{url('/send')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -35,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">CC</label>
-                                <select id = "mltislct" multiple = "multiple">
+                                <select id = "mltislct" name="cc[]" multiple = "multiple">
                                     @forelse($users as $user)
                                         <option >{{$user->email}}</option>
                                     @empty
@@ -49,11 +60,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Message</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" name="message"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Attachment</label>
-                                <input type="file" class="form-control" multiple>
+                                <input type="file" class="form-control" name="attachments[]" multiple>
                             </div>
                         </div>
                     </div>
