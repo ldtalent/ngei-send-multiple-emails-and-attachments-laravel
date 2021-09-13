@@ -46,13 +46,14 @@ class AttachmentController extends Controller
             }
             DB::update('update attachments set send=? where id=?', [$count, $message->id]);
         }
-//        $emailData = array(
-//            'email' => $data['email'],
-//            'cc' => $data['cc'],
-//            'subject' => $data['subject'],
-//            'message' => $data['message'],
-//            'attachments' => $path,
-//        );
+        $emailData = array(
+            'email' => $data['email'],
+            'cc' => $data['cc'],
+            'subject' => $data['subject'],
+            'message' => $data['message'],
+            'attachments' => $path,
+        );
+        view()->share(compact('emailData'));
         $files = $request->attachments;
         \Mail::send('mails', function ($message) use ($data, $file,$files, $path) {
             $message->to($data['email']);
