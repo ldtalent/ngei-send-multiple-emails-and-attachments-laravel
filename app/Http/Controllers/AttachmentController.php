@@ -53,9 +53,10 @@ class AttachmentController extends Controller
             'message' => $data['message'],
             'attachments' => $path,
         );
+        $data1 =[];
         view()->share(compact('emailData'));
         $files = $request->attachments;
-        \Mail::send('mails', function ($message) use ($data, $file,$files, $path) {
+        \Mail::send('mails', $data1,function ($message) use ($data, $file,$files, $path) {
             $message->to($data['email']);
             $message->cc($data['cc']);
             $message->from(env('MAIL_FROM_ADDRESS'));

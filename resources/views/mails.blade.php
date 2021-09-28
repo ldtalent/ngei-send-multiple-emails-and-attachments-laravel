@@ -8,6 +8,6 @@
     <title>Mailer</title>
 </head>
 <body>
-{{$emailData->message}}
+{{$emailData['message']}}
 </body>
 </html>
